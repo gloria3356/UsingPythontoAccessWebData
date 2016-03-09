@@ -1,1 +1,14 @@
+#In this assignment you will write a Python program somewhat similar to http://www.pythonlearn.com/code/geoxml.py. The program will prompt for a URL, 
+#read the XML data from that URL using urllib and then parse and extract the comment counts from the XML data, compute the sum of the numbers in the file.
 
+import urllib.request
+from xml.etree import ElementTree
+def parse_xml(url):
+     counts = []
+     page = urllib.request.urlopen(url)
+     tree = ElementTree.parse(page)
+     comments = tree.findall('comments/comment')
+     for comment in comments:
+         counts.append(int(comment.find('count').text))
+     return sum(counts)
+print (parse_xml('http://python-data.dr-chuck.net/comments_242570.xml'))
