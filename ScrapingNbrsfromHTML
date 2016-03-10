@@ -46,19 +46,13 @@
 # Sum 2482
 
 
-import urllib
-from BeautifulSoup import *
-
+import urllib2
+from bs4 import BeautifulSoup
 url = raw_input('Enter - ')
-html = urllib.urlopen(url).read()
-
-soup = BeautifulSoup(html)
-
+html = urllib2.urlopen(url).read()
+soup = BeautifulSoup(html, "html.parser")
 spans = soup('span')
-
 numbers = 0
-
 for span in spans:
-    numbers.append(int(span.string))
-
+    numbers.append(int(soup('span').string))
 print (sum(numbers))
